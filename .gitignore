@@ -1,0 +1,13 @@
+# chaves e dados locais
+*.pem
+instancia_info.txt
+imagens/
+resultados/
+resultados_*.json
+resultados_*.csv
+benchmark_resultado.json
+tabela_speedup.md
+status.log
+__pycache__/
+venv/
+.venv/

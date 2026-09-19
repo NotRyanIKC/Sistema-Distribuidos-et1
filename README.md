@@ -143,14 +143,5 @@ Porta 22 aberta para `0.0.0.0/0` zera o critério de provisionamento: os scripts
 * Pare a instância no fim do dia para não gastar o crédito do lab: `aws ec2 stop-instances --instance-ids $INSTANCE_ID --region us-east-1`.
 * Se `create-key-pair` for negado, use a chave do lab: baixe `labsuser.pem` em AWS Details e rode `NOME_KEY=vockey KEY_FILE=labsuser.pem ./provisionar_aws.sh`.
 
-## Roteiro da apresentação (10 min)
-
-| Parte | Tempo | O que rodar ou abrir |
-|---|---|---|
-| Problema | 2 min | `ls imagens \| wc -l`, `du -sh imagens`, trecho de `processar_imagem` |
-| Seção crítica | 2 min | Função `agregar()` em `paralelo.py`; `python demo_secao_critica.py`; `python testar_race_condition.py --n 100` |
-| Nuvem | 2 min | Console EC2 ao vivo: instância, zona, tipo; aba Security do SG com as origens |
-| Execução | 3 min | Janela do tmux com a sequencial terminando e o tempo na tela; `python paralelo.py` ao vivo; `verificar_consistencia.py` |
-| Ganho | 1 min | `python relatorio_speedup.py`: speedup medido x Amdahl e o que limitou |
 
 A sequencial leva cerca de 3 a 4 minutos, mais que os 3 minutos da parte de execução. Solução: ao terminar a parte da seção crítica, dispare `python sequencial.py --entrada imagens/ --saida seq.json` numa janela do tmux. Durante a parte da nuvem só o console no navegador é usado, então a instância não roda mais nada e a medição não é afetada. Na parte de execução a sequencial está terminando com o tempo na tela; rode então `python paralelo.py --entrada imagens/ --saida par.json` ao vivo (cerca de 1 a 2 minutos) e `python verificar_consistencia.py`. O speedup do relatório vem do `benchmark.py`, com as duas versões medidas 3 vezes na mesma máquina e com a mesma entrada.
